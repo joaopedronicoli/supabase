@@ -237,7 +237,7 @@ services:
     - db
     command: start --main-service /home/deno/functions/index.ts
     volumes:
-    - ./docker/volumes/functions:/home/deno/functions
+    - /data/compose/69/docker/docker/volumes/functions:/home/deno/functions:rw
     environment:
       SUPABASE_URL: "https://rest.pelg.com.br"
       SUPABASE_ANON_KEY: "${ANON_KEY}"
