@@ -21,7 +21,7 @@ services:
         "postgres",
         "-p", "5435",
         "-c", "listen_addresses='*'",
-        "-c", "shared_preload_libraries='pg_stat_statements'",
+        "-c", "shared_preload_libraries=pg_stat_statements"
       ]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U supabase_admin -d supabase -p 5435"]
