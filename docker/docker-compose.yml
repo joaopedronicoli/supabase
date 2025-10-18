@@ -230,7 +230,7 @@ services:
       VERIFY_JWT: "${FUNCTIONS_VERIFY_JWT}"
     command: [ "start", "--main-service", "/home/deno/functions/main" ]
 
-    analytics:
+  analytics:
     image: supabase/logflare:1.22.6
     deploy:
       restart_policy:
