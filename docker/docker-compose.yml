@@ -290,7 +290,7 @@ services:
       - "-c"
       - "log_min_messages=fatal"
     ports:
-      - "55435:5432"
+      - "55436:5432"
     networks:
       - traefik_public
 
