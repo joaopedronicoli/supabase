@@ -11,6 +11,8 @@ services:
       POSTGRES_PORT: "5435"
       PGPORT: "5435"
       PGDATA: "/var/lib/postgresql/data/pgdata"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_LISTEN_ADDRESSES: "*"
     volumes:
       - supabase_db_data:/var/lib/postgresql/data
       - supabase_db_init:/docker-entrypoint-initdb.d
