@@ -242,7 +242,7 @@ services:
       DB_USERNAME: supabase_admin
       DB_DATABASE: _supabase
       DB_HOSTNAME: db
-      DB_PORT: 5432
+      DB_PORT: 5435
       DB_PASSWORD: ${POSTGRES_PASSWORD}
       DB_SCHEMA: _analytics
       LOGFLARE_PUBLIC_ACCESS_TOKEN: ${LOGFLARE_PUBLIC_ACCESS_TOKEN}
@@ -274,25 +274,24 @@ services:
       - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
       - db-config:/etc/postgresql-custom
     environment:
-      POSTGRES_HOST: /var/run/postgresql
-      PGPORT: 5435
-      POSTGRES_PORT: 5435
-      PGPASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGDATABASE: ${POSTGRES_DB}
-      POSTGRES_DB: ${POSTGRES_DB}
-      JWT_SECRET: ${JWT_SECRET}
-      JWT_EXP: ${JWT_EXPIRY}
-    command:
-      - postgres
-      - "-c"
-      - "config_file=/etc/postgresql/postgresql.conf"
-      - "-c"
-      - "log_min_messages=fatal"
-    ports:
-      - "55436:5435"
-    networks:
-      - network_public
+    POSTGRES_USER: supabase_admin
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    POSTGRES_DB: ${POSTGRES_DB}
+    PGPORT: 5435
+    POSTGRES_PORT: 5435
+    PGPASSWORD: ${POSTGRES_PASSWORD}
+    JWT_SECRET: ${JWT_SECRET}
+    JWT_EXP: ${JWT_EXPIRY}
+  command:
+    - postgres
+    - "-c"
+    - "config_file=/etc/postgresql/postgresql.conf"
+    - "-c"
+    - "log_min_messages=fatal"
+  ports:
+    - "55436:5435"
+  networks:
+    - network_public
 
 
   vector:
