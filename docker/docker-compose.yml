@@ -213,7 +213,7 @@ services:
       PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
       CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
 
-  functions:
+    functions:
     container_name: supabase-edge-functions
     image: supabase/edge-runtime:v1.69.6
     restart: unless-stopped
@@ -258,8 +258,7 @@ services:
     networks:
       - traefik_public
 
-
-    db:
+  db:
     image: supabase/postgres:15.8.1.085
     deploy:
       restart_policy:
@@ -294,6 +293,7 @@ services:
       - "55435:5432"
     networks:
       - traefik_public
+
 
   vector:
     container_name: supabase-vector
