@@ -213,7 +213,7 @@ services:
       PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
       CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
 
-    functions:
+  functions:
     container_name: supabase-edge-functions
     image: supabase/edge-runtime:v1.69.6
     restart: unless-stopped
