@@ -355,3 +355,8 @@ services:
 volumes:
   db-config:
   supabase_analytics_data:
+
+
+networks:
+  traefik_public:
+    external: true
