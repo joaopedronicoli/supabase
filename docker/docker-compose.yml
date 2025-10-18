@@ -215,9 +215,10 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      LOGFLARE_DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
       LOGFLARE_API_KEY: "${LOGFLARE_API_KEY:-local}"
       LOGFLARE_PORT: "4000"
+      SECRET_KEY_BASE: "${JWT_SECRET}"
     deploy:
       labels:
         - traefik.enable=true
