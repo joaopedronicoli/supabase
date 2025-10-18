@@ -358,6 +358,6 @@ volumes:
 
 
 networks:
-  traefik_public:
+  network_public:
     external: true
-    name: supabase_2_traefik_public
+    name: network_public
