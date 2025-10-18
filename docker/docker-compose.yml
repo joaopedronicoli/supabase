@@ -235,7 +235,7 @@ services:
     image: supabase/edge-runtime:v1.69.6
     depends_on:
     - db
-    command: start --main-service /home/deno/functions/index.ts
+    command: start --main-service main
     volumes:
     - /data/compose/69/docker/docker/volumes/functions:/home/deno/functions:rw
     environment:
