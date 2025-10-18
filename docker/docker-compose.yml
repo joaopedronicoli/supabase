@@ -258,7 +258,7 @@ services:
     networks:
       - network_public
 
-    db:
+  db:
     image: supabase/postgres:15.8.1.085
     deploy:
       restart_policy:
