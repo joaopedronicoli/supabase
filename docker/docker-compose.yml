@@ -354,3 +354,4 @@ services:
 
 volumes:
   db-config:
+  supabase_analytics_data:
