@@ -313,7 +313,7 @@ services:
     image: supabase/supavisor:2.7.0
     restart: unless-stopped
     ports:
-      - 55435:5432
+      - 55435:5435
       - ${POOLER_PROXY_PORT_TRANSACTION}:6543
     volumes:
       - ./volumes/pooler/pooler.exs:/etc/pooler/pooler.exs:ro,z
