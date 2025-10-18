@@ -63,8 +63,7 @@ services:
   realtime:
     image: supabase/realtime:v2.51.11
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     environment:
       APP_NAME: "supabase-realtime"
       DB_HOST: "db"
