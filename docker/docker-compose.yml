@@ -256,7 +256,7 @@ services:
     volumes:
       - supabase_analytics_data:/var/lib/logflare
     networks:
-      - traefik_public
+      - network_public
 
   db:
     image: supabase/postgres:15.8.1.085
@@ -292,7 +292,7 @@ services:
     ports:
       - "55436:5435"
     networks:
-      - traefik_public
+      - network_public
 
 
   vector:
