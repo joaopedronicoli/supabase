@@ -69,6 +69,7 @@ services:
       REPLICATION_MODE: "logical"
       JWT_SECRET: "jwtseguro_super"
       RLIMIT_NOFILE: "1048576"
+      APP_NAME: "supabase-realtime"  
     deploy:
       labels:
         - traefik.enable=true
