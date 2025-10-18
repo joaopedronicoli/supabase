@@ -234,7 +234,10 @@ services:
   functions:
     image: supabase/edge-runtime:v1.69.6
     depends_on:
-      - db
+    - db
+    command: start --main-service /home/deno/functions/index.ts
+    volumes:
+    - ./functions:/home/deno/functions
     environment:
       SUPABASE_URL: "https://rest.pelg.com.br"
       SUPABASE_ANON_KEY: "${ANON_KEY}"
