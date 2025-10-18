@@ -4,10 +4,10 @@ services:
   db:
     image: supabase/postgres:15.8.1.085
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-supabase}
-      POSTGRES_USER: ${POSTGRES_USER:-supabase_admin}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      PGPORT: 5435
+      POSTGRES_DB: "${POSTGRES_DB:-supabase}"
+      POSTGRES_USER: "${POSTGRES_USER:-supabase_admin}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      PGPORT: "5435"
     volumes:
       - ./volumes/db/data:/var/lib/postgresql/data:Z
       - ./volumes/db/init-scripts:/docker-entrypoint-initdb.d:Z
@@ -22,13 +22,13 @@ services:
     depends_on:
       - db
     environment:
-      GOTRUE_API_HOST: 0.0.0.0
-      GOTRUE_API_PORT: 9999
-      GOTRUE_SITE_URL: https://studio.pelg.com.br
-      GOTRUE_DB_DRIVER: postgres
-      GOTRUE_DB_DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      GOTRUE_JWT_SECRET: ${JWT_SECRET}
-      GOTRUE_DISABLE_SIGNUP: false
+      GOTRUE_API_HOST: "0.0.0.0"
+      GOTRUE_API_PORT: "9999"
+      GOTRUE_SITE_URL: "https://studio.pelg.com.br"
+      GOTRUE_DB_DRIVER: "postgres"
+      GOTRUE_DB_DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      GOTRUE_JWT_SECRET: "${JWT_SECRET}"
+      GOTRUE_DISABLE_SIGNUP: "false"
     deploy:
       labels:
         - traefik.enable=true
@@ -46,14 +46,14 @@ services:
     depends_on:
       - db
     environment:
-      DB_HOST: db
-      DB_PORT: 5435
-      DB_NAME: ${POSTGRES_DB}
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      PORT: 4000
-      SECRET_KEY_BASE: ${JWT_SECRET}
-      REPLICATION_MODE: logical
+      DB_HOST: "db"
+      DB_PORT: "5435"
+      DB_NAME: "${POSTGRES_DB}"
+      DB_USER: "${POSTGRES_USER}"
+      DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      PORT: "4000"
+      SECRET_KEY_BASE: "${JWT_SECRET}"
+      REPLICATION_MODE: "logical"
     deploy:
       labels:
         - traefik.enable=true
@@ -72,10 +72,10 @@ services:
       - db
       - auth
     environment:
-      ANON_KEY: ${ANON_KEY}
-      SERVICE_KEY: ${SERVICE_KEY}
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      PORT: 5000
+      ANON_KEY: "${ANON_KEY}"
+      SERVICE_KEY: "${SERVICE_KEY}"
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      PORT: "5000"
     deploy:
       labels:
         - traefik.enable=true
@@ -93,12 +93,12 @@ services:
     depends_on:
       - db
     environment:
-      PG_META_PORT: 8080
-      PG_META_DB_HOST: db
-      PG_META_DB_PORT: 5435
-      PG_META_DB_USER: ${POSTGRES_USER}
-      PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      PG_META_DB_NAME: ${POSTGRES_DB}
+      PG_META_PORT: "8080"
+      PG_META_DB_HOST: "db"
+      PG_META_DB_PORT: "5435"
+      PG_META_DB_USER: "${POSTGRES_USER}"
+      PG_META_DB_PASSWORD: "${POSTGRES_PASSWORD}"
+      PG_META_DB_NAME: "${POSTGRES_DB}"
     deploy:
       labels:
         - traefik.enable=true
@@ -116,10 +116,10 @@ services:
     depends_on:
       - db
     environment:
-      PGRST_DB_URI: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      PGRST_DB_ANON_ROLE: anon
-      PGRST_JWT_SECRET: ${JWT_SECRET}
-      PGRST_SERVER_PORT: 3000
+      PGRST_DB_URI: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      PGRST_DB_ANON_ROLE: "anon"
+      PGRST_JWT_SECRET: "${JWT_SECRET}"
+      PGRST_SERVER_PORT: "3000"
     deploy:
       labels:
         - traefik.enable=true
@@ -135,8 +135,8 @@ services:
   supavisor:
     image: supabase/supavisor:2.7.0
     environment:
-      SUPAVISOR_DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      PORT: 6543
+      SUPAVISOR_DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      PORT: "6543"
     deploy:
       labels:
         - traefik.enable=true
@@ -152,9 +152,6 @@ services:
     networks:
       - network_public
 
-networks:
-  network_public:
-    external: true
   studio:
     image: supabase/studio:2025.10.01-sha-8460121
     depends_on:
@@ -163,14 +160,14 @@ networks:
       - meta
       - storage
     environment:
-      STUDIO_PG_META_URL: https://meta.pelg.com.br
-      NEXT_PUBLIC_API_URL: https://studio.pelg.com.br
-      NEXT_PUBLIC_SUPABASE_URL: https://rest.pelg.com.br
+      STUDIO_PG_META_URL: "https://meta.pelg.com.br"
+      NEXT_PUBLIC_API_URL: "https://studio.pelg.com.br"
+      NEXT_PUBLIC_SUPABASE_URL: "https://rest.pelg.com.br"
       NEXT_PUBLIC_DISABLE_SIGNUP: "false"
       NEXT_PUBLIC_ENABLE_LOGS: "true"
-      SUPABASE_PUBLIC_URL: https://rest.pelg.com.br
-      SUPABASE_SERVICE_KEY: ${SERVICE_KEY}
-      SUPABASE_ANON_KEY: ${ANON_KEY}
+      SUPABASE_PUBLIC_URL: "https://rest.pelg.com.br"
+      SUPABASE_SERVICE_KEY: "${SERVICE_KEY}"
+      SUPABASE_ANON_KEY: "${ANON_KEY}"
     deploy:
       labels:
         - traefik.enable=true
@@ -188,9 +185,9 @@ networks:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      LOGFLARE_API_KEY: ${LOGFLARE_API_KEY:-local}
-      LOGFLARE_PORT: 4000
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      LOGFLARE_API_KEY: "${LOGFLARE_API_KEY:-local}"
+      LOGFLARE_PORT: "4000"
     deploy:
       labels:
         - traefik.enable=true
@@ -208,11 +205,11 @@ networks:
     depends_on:
       - db
     environment:
-      SUPABASE_URL: https://rest.pelg.com.br
-      SUPABASE_ANON_KEY: ${ANON_KEY}
-      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_KEY}
-      POSTGRES_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}
-      EDGE_FUNCTIONS_PORT: 8081
+      SUPABASE_URL: "https://rest.pelg.com.br"
+      SUPABASE_ANON_KEY: "${ANON_KEY}"
+      SUPABASE_SERVICE_ROLE_KEY: "${SERVICE_KEY}"
+      POSTGRES_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5435/${POSTGRES_DB}"
+      EDGE_FUNCTIONS_PORT: "8081"
     deploy:
       labels:
         - traefik.enable=true
@@ -229,8 +226,8 @@ networks:
     image: darthsim/imgproxy:v3.8.0
     environment:
       IMGPROXY_BIND: ":8082"
-      IMGPROXY_KEY: ${IMGPROXY_KEY}
-      IMGPROXY_SALT: ${IMGPROXY_SALT}
+      IMGPROXY_KEY: "${IMGPROXY_KEY}"
+      IMGPROXY_SALT: "${IMGPROXY_SALT}"
     deploy:
       labels:
         - traefik.enable=true
@@ -242,3 +239,7 @@ networks:
         - traefik.http.services.supabase_imgproxy.loadbalancer.passHostHeader=true
     networks:
       - network_public
+
+networks:
+  network_public:
+    external: true
