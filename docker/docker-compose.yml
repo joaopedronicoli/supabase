@@ -60,7 +60,7 @@ services:
     networks:
       - network_public
 
-    realtime:
+  realtime:
     image: supabase/realtime:v2.51.11
     depends_on:
       db:
