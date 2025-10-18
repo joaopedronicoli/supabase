@@ -54,11 +54,13 @@ services:
     networks:
       - network_public
 
-  realtime:
+    realtime:
     image: supabase/realtime:v2.51.11
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
+      APP_NAME: "supabase-realtime"
       DB_HOST: "db"
       DB_PORT: "5435"
       DB_NAME: "${POSTGRES_DB}"
@@ -69,8 +71,9 @@ services:
       REPLICATION_MODE: "logical"
       JWT_SECRET: "jwtseguro_super"
       RLIMIT_NOFILE: "1048576"
-      APP_NAME: "supabase-realtime"  
     deploy:
+      restart_policy:
+        condition: on-failure
       labels:
         - traefik.enable=true
         - traefik.docker.network=network_public
@@ -81,6 +84,7 @@ services:
         - traefik.http.services.supabase_realtime.loadbalancer.passHostHeader=true
     networks:
       - network_public
+
 
   storage:
     image: supabase/storage-api:v1.28.0
