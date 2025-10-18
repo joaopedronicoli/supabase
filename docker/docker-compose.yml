@@ -1,24 +1,25 @@
 version: "3.8"
 
+
 services:
   db:
-  image: supabase/postgres:15.8.1.085
-  environment:
-    POSTGRES_DB: "${POSTGRES_DB:-supabase}"
-    POSTGRES_USER: "${POSTGRES_USER:-supabase_admin}"
-    POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-supersecret}"
-    POSTGRES_PORT: "5435"    # ✅ define explicitamente a porta
-    PGPORT: "5435"
-    PGDATA: "/var/lib/postgresql/data/pgdata"
-  volumes:
-    - supabase_db_data:/var/lib/postgresql/data
-  command: >
-    bash -c "rm -rf /var/lib/postgresql/data/* && docker-entrypoint.sh postgres -p 5435"
-  deploy:
-    restart_policy:
-      condition: on-failure
-  networks:
-    - network_public
+    image: supabase/postgres:15.8.1.085
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB:-supabase}"
+      POSTGRES_USER: "${POSTGRES_USER:-supabase_admin}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-supersecret}"
+      POSTGRES_PORT: "5435"
+      PGPORT: "5435"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - supabase_db_data:/var/lib/postgresql/data
+    command: >
+      bash -c "rm -rf /var/lib/postgresql/data/* && docker-entrypoint.sh postgres -p 5435"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    networks:
+      - network_public
 
 
   auth:
