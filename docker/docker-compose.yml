@@ -243,3 +243,9 @@ services:
 networks:
   network_public:
     external: true
+
+volumes:
+  supabase_db_data:
+    external: false
+  supabase_db_init:
+    external: false
