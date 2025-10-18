@@ -275,8 +275,8 @@ services:
       - db-config:/etc/postgresql-custom
     environment:
       POSTGRES_HOST: /var/run/postgresql
-      PGPORT: 5432
-      POSTGRES_PORT: 5432
+      PGPORT: 5435
+      POSTGRES_PORT: 5435
       PGPASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       PGDATABASE: ${POSTGRES_DB}
@@ -290,7 +290,7 @@ services:
       - "-c"
       - "log_min_messages=fatal"
     ports:
-      - "55436:5432"
+      - "55436:5435"
     networks:
       - traefik_public
 
